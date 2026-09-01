@@ -1,0 +1,25 @@
+simulation:
+  time_step_seconds: 1
+  decision_interval_seconds: 5
+  episode_duration_seconds: 1800
+  min_green_seconds: 15
+  max_green_seconds: 60
+  yellow_seconds: 3
+  max_queue: 100
+  saturation_flow_vph: 1800
+  wait_reference_seconds: 300
+  initial_phase: NS_GREEN
+reward:
+  name: queue_reward
+  switch_penalty: 0.02
+  weights:
+    total_queue: 0.40
+    mean_wait: 0.25
+    max_wait: 0.15
+    directional_imbalance: 0.10
+    spillback_risk: 0.10
+actuated:
+  queue_weight: 1.0
+  mean_wait_weight: 0.10
+  max_wait_weight: 0.20
+  fixed_green_seconds: 30

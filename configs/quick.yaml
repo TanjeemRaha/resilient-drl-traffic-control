@@ -1,0 +1,16 @@
+profile: quick
+label: smoke-test
+training:
+  seeds: [0]
+  timesteps: {DQN_standard: 5000, PPO_standard: 5000, PPO_resilient: 5000}
+  checkpoint_frequency: 2500
+  eval_frequency: 2500
+  eval_episodes: 2
+evaluation:
+  traffic_seeds: [100, 101]
+  episodes_per_seed: 1
+bootstrap_samples: 500
+plotting:
+  example_scenario: combined_unseen
+  example_traffic_seed: 100
+

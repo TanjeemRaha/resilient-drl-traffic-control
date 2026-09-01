@@ -1,0 +1,43 @@
+scenarios:
+  normal:
+    base_arrival_vph: {N: 500, S: 500, E: 500, W: 500}
+    events: []
+  peak_ew:
+    base_arrival_vph: {N: 450, S: 450, E: 450, W: 450}
+    events:
+      - {type: demand_multiplier, approaches: [E, W], start: 600, end: 1200, value: 1.8}
+  lane_closure_e:
+    base_arrival_vph: {N: 500, S: 500, E: 500, W: 500}
+    events:
+      - {type: capacity_factor, approaches: [E], start: 600, end: 1200, value: 0.50}
+  flood_ew:
+    base_arrival_vph: {N: 500, S: 500, E: 500, W: 500}
+    events:
+      - {type: capacity_factor, approaches: [E, W], start: 600, end: 1200, value: 0.35}
+  incident_s_recovery:
+    base_arrival_vph: {N: 500, S: 500, E: 500, W: 500}
+    events:
+      - {type: capacity_factor, approaches: [S], start: 600, end: 900, value: 0.20}
+      - {type: capacity_ramp, approaches: [S], start: 900, end: 1200, start_value: 0.20, end_value: 1.00}
+  combined_unseen:
+    base_arrival_vph: {N: 400, S: 600, E: 450, W: 650}
+    events:
+      - {type: demand_multiplier, approaches: [E, W], start: 600, end: 1200, value: 1.6}
+      - {type: capacity_factor, approaches: [S, E], start: 600, end: 1200, value: 0.40}
+  spillback_stress:
+    evaluation_only: true
+    description: Synthetic finite-storage stress test; not a calibrated demand forecast.
+    base_arrival_vph: {N: 1000, S: 1000, E: 1200, W: 1200}
+    events:
+      - {type: capacity_factor, approaches: [E, W], start: 450, end: 1350, value: 0.25}
+training:
+  normal_training:
+    arrival_ranges_vph: {N: [350, 750], S: [350, 750], E: [350, 750], W: [350, 750]}
+    disruption_probability: 0.0
+  resilient_training:
+    arrival_ranges_vph: {N: [350, 750], S: [350, 750], E: [350, 750], W: [350, 750]}
+    disruption_probability: 0.8
+    disruption_start_range: [450, 750]
+    disruption_duration_range: [240, 600]
+    capacity_factor_range: [0.35, 0.75]
+    approaches_per_event: [1, 2]

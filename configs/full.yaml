@@ -1,0 +1,16 @@
+profile: full
+label: research
+training:
+  seeds: [0, 1, 2]
+  timesteps: {DQN_standard: 150000, PPO_standard: 250000, PPO_resilient: 300000}
+  checkpoint_frequency: 25000
+  eval_frequency: 10000
+  eval_episodes: 5
+evaluation:
+  traffic_seeds: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119]
+  episodes_per_seed: 1
+bootstrap_samples: 2000
+plotting:
+  example_scenario: combined_unseen
+  example_traffic_seed: 100
+
